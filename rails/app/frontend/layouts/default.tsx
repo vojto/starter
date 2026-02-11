@@ -1,12 +1,15 @@
 import { type ReactNode } from "react"
-import { Box, Flex, Text } from "@radix-ui/themes"
-import { Link } from "@inertiajs/react"
+import { Box, Button, Flex, Text } from "@radix-ui/themes"
+import { Link, router, usePage } from "@inertiajs/react"
+import { SharedPropsSchema } from "@/schemas"
 
 interface DefaultLayoutProps {
   children: ReactNode
 }
 
 export default function DefaultLayout({ children }: DefaultLayoutProps) {
+  const { auth } = SharedPropsSchema.parse(usePage().props)
+
   return (
     <Box style={{ minHeight: "100vh", backgroundColor: "var(--color-background)" }}>
       {/* Header */}
@@ -30,6 +33,27 @@ export default function DefaultLayout({ children }: DefaultLayoutProps) {
                 App
               </Text>
             </Link>
+
+            {auth?.user ? (
+              <Flex gap="3" align="center">
+                <Text size="2" style={{ color: "var(--gray-11)" }}>
+                  Logged in as {auth.user.email}
+                </Text>
+                <Button
+                  variant="soft"
+                  color="gray"
+                  onClick={() => {
+                    router.delete("/logout")
+                  }}
+                >
+                  Log out
+                </Button>
+              </Flex>
+            ) : (
+              <Button asChild>
+                <Link href="/login">Log in</Link>
+              </Button>
+            )}
           </Flex>
         </header>
       </Box>

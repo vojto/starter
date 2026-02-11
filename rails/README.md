@@ -1,24 +1,48 @@
-# README
+# Rails App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails 8.1 + Inertia.js + React starter app.
 
-Things you may want to cover:
+## Requirements
 
-* Ruby version
+- Ruby 3.4.x (`mise` recommended)
+- Node.js + pnpm
+- PostgreSQL
 
-* System dependencies
+## Setup
 
-* Configuration
+```bash
+mise install
+bundle install
+pnpm install
+```
 
-* Database creation
+## Database
 
-* Database initialization
+This app uses PostgreSQL in all environments.
 
-* How to run the test suite
+Connection overrides (all optional, from `config/database.yml`):
 
-* Services (job queues, cache servers, search engines, etc.)
+- `DB_HOST`
+- `DB_PORT`
+- `DB_USERNAME`
+- `DB_PASSWORD`
 
-* Deployment instructions
+Create and migrate:
 
-* ...
+```bash
+bin/rails db:create db:migrate
+```
+
+## Run
+
+```bash
+bin/dev
+```
+
+## Quality checks
+
+```bash
+bundle exec rails test
+pnpm run check
+pnpm run lint
+```

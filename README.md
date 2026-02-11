@@ -4,7 +4,7 @@ A starter kit monorepo for Ruby on Rails projects using Tailwind CSS, Inertia.js
 
 ## Tech Stack
 
-- **Backend**: Ruby on Rails 8.1, SQLite (dev) / PostgreSQL (prod)
+- **Backend**: Ruby on Rails 8.1, PostgreSQL
 - **Frontend**: React 19, TypeScript, Inertia.js 2
 - **Styling**: Radix UI Themes + Tailwind CSS v4
 - **Build**: Vite 7 with vite-plugin-ruby
@@ -29,6 +29,8 @@ mise install
 # Install dependencies
 bundle install
 pnpm install
+
+# Ensure PostgreSQL is running locally (optional overrides: DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD)
 
 # Setup database
 rails db:create db:migrate
