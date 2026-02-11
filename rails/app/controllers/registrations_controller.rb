@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RegistrationsController < ApplicationController
   before_action :require_guest_user, only: %i[new create]
 
@@ -10,7 +12,7 @@ class RegistrationsController < ApplicationController
 
     if user.save
       start_new_session_for(user)
-      redirect_to root_path, status: :see_other
+      redirect_to root_path, notice: "Account created successfully.", status: :see_other
       return
     end
 

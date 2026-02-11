@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
@@ -8,7 +10,8 @@ class ApplicationController < ActionController::Base
     {
       auth: {
         user: Current.user&.slice(:id, :email)
-      }
+      },
+      flash: flash.to_hash.slice("notice", "success", "alert", "error")
     }
   end
 
@@ -23,13 +26,13 @@ class ApplicationController < ActionController::Base
   def require_authenticated_user
     return if current_user
 
-    redirect_to login_path
+    redirect_to login_path, alert: "Please log in to continue."
   end
 
   def require_guest_user
     return unless current_user
 
-    redirect_to root_path
+    redirect_to root_path, notice: "You are already logged in."
   end
 
   def start_new_session_for(user)

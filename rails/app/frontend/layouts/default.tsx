@@ -1,6 +1,7 @@
 import { type ReactNode } from "react"
 import { Box, Button, Flex, Text } from "@radix-ui/themes"
 import { Link, router, usePage } from "@inertiajs/react"
+import FlashToast from "@/components/flash-toast"
 import { SharedPropsSchema } from "@/schemas"
 
 interface DefaultLayoutProps {
@@ -66,6 +67,8 @@ export default function DefaultLayout({ children }: DefaultLayoutProps) {
           </Box>
         </main>
       </Box>
+
+      <FlashToast />
     </Box>
   )
 }
