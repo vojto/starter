@@ -46,7 +46,7 @@ This starter is intentionally minimal. Before using it for a real project, work 
 
 - Add model, controller, and integration tests for core flows.
 - Add end-to-end tests for critical user journeys (auth + core value path).
-- Enforce CI gates: `rails test`, `pnpm run check`, `pnpm run lint`, security scans.
+- Enforce CI gates: `bundle exec rspec`, `pnpm run check`, `pnpm run lint`, security scans.
 - Add automated checks for migrations and schema consistency.
 
 ## 7) Deployment and Environments

@@ -42,7 +42,7 @@ bin/dev
 ## Quality checks
 
 ```bash
-bundle exec rails test
+bundle exec rspec
 pnpm run check
 pnpm run lint
 ```
