@@ -14,7 +14,7 @@ const appName = (import.meta.env.VITE_APP_NAME ?? "App") as string
 
 void createInertiaApp({
   // Dynamic title generation
-  title: (title) => `${title} - ${appName}`,
+  title: (title) => (title ? `${title} - ${appName}` : appName),
 
   // Page resolution - imports from app/frontend/pages/**/*.tsx
   resolve: (name) => {
