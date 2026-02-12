@@ -7,8 +7,10 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore all environment files.
+# Ignore all environment files (except .env.example and .envrc).
 /.env*
+!/.env.example
+!/.envrc
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -21,7 +23,7 @@
 !/tmp/pids/
 !/tmp/pids/.keep
 
-# Ignore storage (uploaded files in development and any SQLite databases).
+# Ignore storage (uploaded files in development).
 /storage/*
 !/storage/.keep
 /tmp/storage/*

@@ -60,6 +60,7 @@ export default function Show(rawProps: Props) {
 - Start Ruby files with `# frozen_string_literal: true`.
 - Boolean DB columns must use `is_` or `wants_` prefixes (example: `is_active`, `wants_notifications`).
 - Use Rake tasks (`lib/tasks/*.rake`) for scripts/automation instead of custom bin scripts.
+- Database is always PostgreSQL. No SQLite.
 
 ### Database field change checklist
 
@@ -69,6 +70,24 @@ export default function Show(rawProps: Props) {
 - Update affected Inertia pages.
 - Update Zod schemas (reusable in `app/frontend/schemas/`, one-off inline).
 - Run `pnpm run check`.
+
+## Secrets management
+
+- Secrets are managed via `.env` file (loaded by `dotenv-rails` and `direnv`).
+- Never commit `.env` to git (it is in `.gitignore`).
+- See `.env.example` for required variables.
+- `.kamal/secrets` reads from environment variables populated by `.env`.
+- Do not use Rails encrypted credentials for app secrets; use ENV vars instead.
+
+## Deployment
+
+- Deployed via Kamal to a server.
+- Container registry: GitHub Container Registry (`ghcr.io`).
+- Two processes in production: **web** (Puma via Thruster) and **job** (Solid Queue via `bin/jobs`).
+- `SOLID_QUEUE_IN_PUMA` is `false` in production; jobs run as a separate process.
+- Database config uses `DB_HOST`, `DB_PORT`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` env vars.
+- Use `config/recurring.yml` for scheduled jobs (Solid Queue recurring tasks, not cron).
+- Deploy config is in `config/deploy.yml`, secrets in `.kamal/secrets`.
 
 ## Required checks
 
@@ -99,6 +118,7 @@ export default function Show(rawProps: Props) {
 mise install
 bundle install
 pnpm install
+cp .env.example .env  # then fill in values
 rails db:create db:migrate
 bin/dev
 ```
